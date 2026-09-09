@@ -1,16 +1,15 @@
 # @wassname/pi-md-export
 
-Export a Pi session as Markdown.
+Export Pi sessions to Markdown files or the clipboard.
 
 ```text
-/md          current branch
-/md all      full session file
-/md 3        last three turns
-/md tc       include tool calls and results
-/md t        include thinking blocks
+/md      current branch
+/md all  full session file
+/md 3    last three turns
+/md tc   include tool calls
+/md t    include thinking
 ```
 
-`/md` asks whether to copy the result or save it under `~/.pi/agent/pi-sessions-extracted/`.
-Clipboard export tries `pbcopy`, `wl-copy`, then `xclip -selection clipboard`. In an interactive terminal, it then uses OSC 52 for SSH and Herdr relays; if that is unavailable, it saves the file instead.
+Choose copy or save. In Herdr SSH, copying uses OSC 52: the remote terminal tells your local terminal to set its clipboard. If copying is unavailable, the file is saved under `~/.pi/agent/pi-sessions-extracted/`.
 
-<!-- Initial package assembled by PI. -->
+<!-- PI -->
