@@ -492,7 +492,11 @@ export function clipboardCommands(): Array<[string, string[]]> {
   ];
 }
 
-function copyToClipboard(text: string): void {
+export function osc52Sequence(text: string): string {
+  return `\u001b]52;c;${Buffer.from(text).toString("base64")}\u0007`;
+}
+
+function copyToClipboard(text: string, allowOsc52: boolean): void {
   const commands = clipboardCommands();
   const errors: string[] = [];
   for (const [command, args] of commands) {
@@ -502,6 +506,10 @@ function copyToClipboard(text: string): void {
     } catch (error) {
       errors.push(`${command}: ${error instanceof Error ? error.message : String(error)}`);
     }
+  }
+  if (allowOsc52 && process.stdout.isTTY) {
+    process.stdout.write(osc52Sequence(text));
+    return;
   }
   throw new Error(`No clipboard command succeeded. ${errors.join("; ")}`);
 }
@@ -689,7 +697,7 @@ export default function (pi: ExtensionAPI) {
 
         if (choice === "Copy to clipboard") {
           try {
-            copyToClipboard(result.content);
+            copyToClipboard(result.content, ctx.mode === "tui");
             ctx.ui.notify(`Copied to clipboard${suffix}${mode}`, "success");
           } catch {
             const outputFile = saveMarkdown(result.content, result.filename);

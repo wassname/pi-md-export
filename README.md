@@ -11,6 +11,6 @@ Export a Pi session as Markdown.
 ```
 
 `/md` asks whether to copy the result or save it under `~/.pi/agent/pi-sessions-extracted/`.
-Clipboard export tries `pbcopy`, `wl-copy`, then `xclip -selection clipboard`; if none works, it saves the file instead.
+Clipboard export tries `pbcopy`, `wl-copy`, then `xclip -selection clipboard`. In an interactive terminal, it then uses OSC 52 for SSH and Herdr relays; if that is unavailable, it saves the file instead.
 
 <!-- Initial package assembled by PI. -->
