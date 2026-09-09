@@ -506,6 +506,13 @@ function copyToClipboard(text: string): void {
   throw new Error(`No clipboard command succeeded. ${errors.join("; ")}`);
 }
 
+function saveMarkdown(content: string, filename: string): string {
+  const outputFile = path.join(OUTPUT_DIR, filename);
+  fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+  fs.writeFileSync(outputFile, content, "utf-8");
+  return outputFile;
+}
+
 /**
  * Format date as YYYYMMDD_HHMMSS
  */
@@ -681,14 +688,17 @@ export default function (pi: ExtensionAPI) {
         const mode = exportAll ? " (full file)" : " (branch)";
 
         if (choice === "Copy to clipboard") {
-          copyToClipboard(result.content);
-          ctx.ui.notify(`Copied to clipboard${suffix}${mode}`, "success");
+          try {
+            copyToClipboard(result.content);
+            ctx.ui.notify(`Copied to clipboard${suffix}${mode}`, "success");
+          } catch {
+            const outputFile = saveMarkdown(result.content, result.filename);
+            ctx.ui.notify(`No system clipboard; saved${suffix}${mode}: ${outputFile}`, "warning");
+          }
           return;
         }
 
-        const outputFile = path.join(OUTPUT_DIR, result.filename);
-        fs.mkdirSync(OUTPUT_DIR, { recursive: true });
-        fs.writeFileSync(outputFile, result.content, "utf-8");
+        const outputFile = saveMarkdown(result.content, result.filename);
         ctx.ui.notify(`Saved${suffix}${mode}: ${outputFile}`, "success");
       } catch (err) {
         const errMsg = err instanceof Error ? err.message : String(err);

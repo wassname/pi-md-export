@@ -11,6 +11,6 @@ Export a Pi session as Markdown.
 ```
 
 `/md` asks whether to copy the result or save it under `~/.pi/agent/pi-sessions-extracted/`.
-Clipboard export tries `pbcopy`, `wl-copy`, then `xclip -selection clipboard`.
+Clipboard export tries `pbcopy`, `wl-copy`, then `xclip -selection clipboard`; if none works, it saves the file instead.
 
 <!-- Initial package assembled by PI. -->
