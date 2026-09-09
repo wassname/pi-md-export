@@ -1,0 +1,26 @@
+{
+  "name": "@wassname/pi-md-export",
+  "version": "0.1.0",
+  "description": "Export Pi sessions to Markdown files or the system clipboard",
+  "type": "module",
+  "license": "MIT",
+  "keywords": ["pi-package", "pi", "pi-extension", "markdown", "session"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wassname/pi-md-export.git"
+  },
+  "homepage": "https://github.com/wassname/pi-md-export#readme",
+  "bugs": {
+    "url": "https://github.com/wassname/pi-md-export/issues"
+  },
+  "files": ["extensions", "README.md", "NOTICE", "LICENSE", "package.json"],
+  "scripts": {
+    "test": "node --experimental-strip-types --test tests/*.test.ts"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": ">=0.84.0 <1.0.0"
+  },
+  "pi": {
+    "extensions": ["./extensions/md.ts"]
+  }
+}
