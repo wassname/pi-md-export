@@ -1,4 +1,4 @@
-# @wassname/pi-md-export
+# @wassname2/pi-md-export
 
 Export Pi sessions to Markdown files or the clipboard.
 

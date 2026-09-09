@@ -1,5 +1,5 @@
 {
-  "name": "@wassname/pi-md-export",
+  "name": "@wassname2/pi-md-export",
   "version": "0.1.0",
   "description": "Export Pi sessions to Markdown files or the system clipboard",
   "type": "module",
