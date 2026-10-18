@@ -1,6 +1,6 @@
 {
   "name": "@wassname2/pi-md-export",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Export Pi sessions to Markdown files or the system clipboard",
   "type": "module",
   "license": "MIT",
@@ -18,7 +18,11 @@
     "test": "node --experimental-strip-types --test tests/*.test.ts"
   },
   "peerDependencies": {
-    "@earendil-works/pi-coding-agent": ">=0.84.0 <1.0.0"
+    "@earendil-works/pi-coding-agent": "*"
+  },
+  "publishConfig": { "access": "public" },
+  "peerDependenciesMeta": {
+    "@earendil-works/pi-coding-agent": { "optional": true }
   },
   "pi": {
     "extensions": ["./extensions/md.ts"]
